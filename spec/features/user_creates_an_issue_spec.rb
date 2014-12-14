@@ -11,6 +11,9 @@ feature "User creates an issue", %q{
     # * I must provide description
     # * I can mark the issue as reproducible
     # * I can specify the category of the issue
+    # * I can categorize an issue as either "Bug", "Feature Request", or "Customer Service"
+    # * I can rate the severity of the `Issue` as either "High", "Moderate" or "Low"
+    # * I must choose a severity
     context "with valid attributes" do
       it "creates an issue with valid attributes" do
         visit '/issues/new'
@@ -18,7 +21,9 @@ feature "User creates an issue", %q{
         fill_in "Title", with: "Broken Link"
         fill_in "Description", with: "The sign in link is broken"
         check "Is reproducible"
-        fill_in "Category", with: "bug"
+        select('Feature Request', from: 'Category')
+        choose "Moderate"
+        # fill_in "Category", with: "bug"
         click_on "Create Issue"
 
         expect(page).to have_content "Issue was successfully created"

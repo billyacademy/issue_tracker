@@ -35,6 +35,8 @@ class IssuesController < ApplicationController
         format.json { render json: @issue.errors, status: :unprocessable_entity }
       end
     end
+
+
   end
 
   # PATCH/PUT /issues/1
@@ -69,6 +71,6 @@ class IssuesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def issue_params
-      params.require(:issue).permit(:title, :description, :is_reproducible, :category)
+      params.require(:issue).permit(:title, :description, :is_reproducible, :category, :severity)
     end
 end

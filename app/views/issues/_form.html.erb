@@ -25,7 +25,15 @@
   </div>
   <div class="field">
     <%= f.label :category %><br>
-    <%= f.text_field :category %>
+    <%= f.select :category, ["Bug", "Feature Request", "Customer Service"],
+    include_blank: true %>
+  </div>
+  <div class="field">
+    <%= f.label :severity %><br>
+    <% Issue.severities.each do |severity| %>
+    <%= f.radio_button :severity, severity %>
+    <%= f.label :severity, severity, value: severity %>
+    <% end %>
   </div>
   <div class="actions">
     <%= f.submit %>
