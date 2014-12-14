@@ -16,11 +16,14 @@ feature "User creates an issue", %q{
     # * I must choose a severity
     context "with valid attributes" do
       it "creates an issue with valid attributes" do
+        Category.create!(name: "Bug")
+        Category.create!(name: "Feature Request")
         visit '/issues/new'
 
         fill_in "Title", with: "Broken Link"
         fill_in "Description", with: "The sign in link is broken"
         check "Is reproducible"
+        save_and_open_page
         select('Feature Request', from: 'Category')
         choose "Moderate"
         # fill_in "Category", with: "bug"

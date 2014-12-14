@@ -1,16 +1,12 @@
 class Issue < ActiveRecord::Base
+  belongs_to :category,
+    inverse_of: :issues
+
   validates :title, presence: true
   validates :description, presence: true
   validates :category, presence: true
   validates :severity, presence: true
-
-  def self.categories
-    [
-      'Bug',
-      'Feature Request',
-      'Customer Service'
-    ]
-  end
+  validates :category_id, presence: true
 
   def self.severities
     [
